@@ -59,4 +59,5 @@ of this code and any derived code
 
 
 ## My USA model may be optimistic, we are not flattening the curve as of May 3
+### [Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
