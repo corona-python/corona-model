@@ -34,9 +34,9 @@ of this code and any derived code
 ## Options
 ![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
 
-## USA Current Trend
+## USA Current Trend - Political Priority
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
-## Taiwan Current Trend - How Did They Do This?
+## Taiwan Current Trend - Medical Priority
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan_flat.png)
  
