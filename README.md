@@ -1,8 +1,8 @@
 # corona-model
 
 Downloads
-[Source and Exe  ](https://github.com/corona-python/corona-model/releases)
-[Presentation  ](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
+[Source and Exe, ](https://github.com/corona-python/corona-model/releases)
+[Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
 # What if you could change the world?
 
