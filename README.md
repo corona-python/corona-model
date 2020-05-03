@@ -38,5 +38,5 @@ of this code and any derived code
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
 ## Taiwan Current Trend - How?
-![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan_flat.png)
+![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
  
