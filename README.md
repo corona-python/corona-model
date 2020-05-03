@@ -53,3 +53,8 @@ of this code and any derived code
  ### With better testing after lockdown ends, we'd save 80,000 lives
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
 
+ ## What if we responded more aggresively, 30 days earlier?
+ ![Faster Response](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/fast.png)
+
+
+
