@@ -11,24 +11,33 @@ from sys import exit
 
 # Header Start
 About = '''
-Corona Virus Model
-Author: Robert Leyendecker
-Version: .1
-Date: April 11, 2020
-Menus: PySimpleGUI
-Plots: matplotlib
-Windows Exe: Pyinstaller
-
 Corona Virus Instructional Project
-Author: Robert Leyendecker, Austin, TX
-First Version: Apr 11, 2020
-(c) 2020, Robert Leyendecker
+Author: Robert Leyendecker (c) 2020
+Version: .2, May 3, 2020
+Python: 3.8, Menus: PySimpleGUI, Plots: matplotlib, Windows Exe: Pyinstaller
+Build: pyinstaller -w -F --hidden-import="pkg_resources.py2_warn" corona.py
 
 This program is intended to explore the political choices available to confront a pandemic.
 Each choice involves a policy decision that has life and death consequences. 
 - Do we spend tax money on testing or do we give tax breaks to the rich in an election year?
-- Do we focus on early containment or do nothing in the hope that it will just go away?
+- Do we focus on early containment/mitigation or gamble with the hope that it will just go away?
 - How many deaths will occur as a result of our decision?
+
+* Hover over menu items to see a brief description of parameters *
+
+Influential Parameters:
+- Percent sick traced outside lockdown
+- Days of denial
+- Early end of lockdown
+- How quickly we react to lockdown changes (attack/decay)
+- Days before test results
+- Lessons learned
+- Health care quality (percent sick who die)
+
+Number of infections is estimated as 2X number of govt. reported cases.
+This is due to large number of asymptomatic cases and inconsistent reporting.
+Lockdown attack/decay is implemented as simple first order recursive section.
+Test tracing is weighted inversely by days to results.
 
 This code may be modified and distributed freely as long as this header is included at the top
 of this code and any derived code
@@ -63,11 +72,13 @@ def outp(s):
 
 def outpf(s):
     outp(s)
-    fout.write("{0}\n".format(s))
+    if fout:
+        fout.write("{0}\n".format(s))
 
 
 def outf(s):
-    fout.write("{0}\n".format(s))
+    if fout:
+        fout.write("{0}\n".format(s))
 
 
 def get_defaults():
@@ -84,6 +95,7 @@ def get_defaults():
             'plot_cumulative_cases': {'val': False, 'tip': 'Are we flattening the curve?'},
             'plot_new_cases': {'val': False, 'tip': 'Plot the new cases being discovered'},
             'plot_hospital_beds': {'val': False, 'tip': 'Plot the number of hospital beds being used'},
+            'create_corona_csv': {'val': False, 'tip': 'Output corona.csv file in current directory'},
             'meta': {
                 'title': 'Political Parameters',
                 'children': {
@@ -111,6 +123,7 @@ def get_defaults():
         'Testing Parameters': {
             'days_to_deploy': {'val': 0, 'tip': 'Days before deploying testing?'},
             'days_before_result': {'val': 5, 'tip': 'Days before test results.'},
+            'percent_random_tested': {'val': 0.0, 'tip': 'Number of random people tested'},
             'percent_sick_tested': {'val': .001, 'tip': 'Percent of people showing symptoms being tested.'},
             'percent_accuracy': {'val': .8, 'tip': 'Percentage of accurate positive test results.'},
             'percent_pos_traced': {'val': .25, 'tip': 'Percentage of contacts from positive test case that can be isolated?'},
@@ -142,6 +155,7 @@ def get_defaults():
         },
         'Testing Lessons Learned': {
             'days_before_result': {'val': 3, 'tip': 'Days before test result known'},
+            'percent_random_tested': {'val': .001, 'tip': 'Number of random people tested'},
             'percent_sick_tested': {'val': .001, 'tip': 'Number of people with symptoms tested'},
             'percent_accuracy': {'val': .8, 'tip': 'Percent of positive tests correctly identified'},
             'percent_pos_traced': {'val': .25, 'tip': 'Percent of contacts isolated when someone tests positive'},
@@ -208,6 +222,7 @@ def set_model(model):
         ld['attack']['val'] = .98
         ll['allow_testing']['val'] = True
         ll_ld['forced_ending']['val'] = True
+        ll_test['percent_random_tested']['val'] = 0.0
 
     elif model == 'Slow Medical':
         default['allow_learning']['val'] = True
@@ -248,8 +263,6 @@ def get_keys(dct, value):
 def run_sim(parms):
     global fout
 
-    fout = open("corona_early_cure.csv", "w+")
-
     default = parms['Outside Lockdown']
     ld = parms['Lockdown Parameters']
     test = parms['Testing Parameters']
@@ -259,6 +272,10 @@ def run_sim(parms):
     ll_test = parms['Testing Lessons Learned']
     ll_ld = parms['Lockdown Lessons Learned']
     plots = default
+
+    # output data to csv?
+    if default['create_corona_csv']['val']:
+        fout = open("corona.csv", "w+")
 
     # percent of we find to isolate after contact with person showing symptoms
     response_model = default['response_model']['val']
@@ -305,6 +322,9 @@ def run_sim(parms):
     # days before test results
     test_days_before_result = test['days_before_result']['val']
 
+    # percent of carriers random tested
+    test_percent_random_tested = test['percent_random_tested']['val']
+
     # percent of carriers tested before symptoms
     test_percent_sick_tested = test['percent_sick_tested']['val']
 
@@ -326,6 +346,7 @@ def run_sim(parms):
     ll_test_percent_pos_traced = ll_test['percent_pos_traced']['val']
     ll_test_days_before_result = ll_test['days_before_result']['val']
     ll_test_percent_accuracy = ll_test['percent_accuracy']['val']
+    ll_test_percent_random_tested = ll_test['percent_random_tested']['val']
     ll_test_percent_sick_tested = ll_test['percent_sick_tested']['val']
 
     pbuf1 = ""
@@ -346,7 +367,8 @@ def run_sim(parms):
     else:
         pbuf1 += "  Days to Deploy Testing: {}\n".format(test_days_to_deploy)
         pbuf1 += "  Test Accuracy: {0}\n".format(test_percent_accuracy)
-        pbuf1 += "  Tested {0},  Result Wait {1}\n".format(test_percent_sick_tested, test_days_before_result)
+        pbuf1 += "  Tested, Random {},  Sick {}\n".format(test_percent_random_tested, test_percent_sick_tested)
+        pbuf1 += "  Result Wait {}\n".format(test_days_before_result)
         pbuf1 += "  Isolated, Adj by Wait: {0:0.4f}\n".format(test_percent_pos_traced / test_days_before_result)
 
     if ll_allowed:
@@ -364,7 +386,8 @@ def run_sim(parms):
             pbuf1 += "  No Testing\n"
         else:
             pbuf1 += "  Test Accuracy: {0}\n".format(ll_test_percent_accuracy)
-            pbuf1 += "  Tested {0},  Result Wait {1}\n".format(ll_test_percent_sick_tested, ll_test_days_before_result)
+            pbuf1 += "  Tested, Random {},  Sick {}\n".format(ll_test_percent_random_tested, ll_test_percent_sick_tested)
+            pbuf1 += "  Result Wait {}\n".format(ll_test_days_before_result)
             pbuf1 += "  Isolated, Adj by Wait: {0:0.4f}\n".format(ll_test_percent_pos_traced / ll_test_days_before_result)
     else:
         pbuf1 += "  No Lessons Learned\n"
@@ -560,6 +583,7 @@ def run_sim(parms):
 
             if ll_test_allowed:
                 test_percent_pos_traced = ll_test_percent_pos_traced
+                test_percent_random_tested = ll_test_percent_random_tested
                 test_percent_sick_tested = ll_test_percent_sick_tested
                 test_percent_accuracy = ll_test_percent_accuracy
                 test_time = ll_days_to_deploy + days_before_symptoms + ll_test_days_before_result
@@ -573,13 +597,7 @@ def run_sim(parms):
             ll_val = itot
             ll_enabled = 1
 
-        # introduced cases
-        if not ld:
-            intro += 1
-            intro_list.append(1)
-        if i >= days_before_free and intro_list:
-            intro -= intro_list.pop(0)
-
+        # self-isolation and tracing
         if i >= days_before_symptoms - 1:
 
             # People who self-isolate due to more severe symptoms
@@ -610,6 +628,22 @@ def run_sim(parms):
             # put back on list
             public_list.insert(0, public)
 
+        # random testing and tracing of asymptomatic
+        if test_percent_random_tested:
+
+            # find out who is testing positive - we only test people showing symptoms
+            # this emulates a person with milder symptoms who goes to dr and gets routine test
+            pos = public * test_percent_random_tested * test_percent_accuracy
+            iso += pos
+            sick_cnt += pos
+            public -= pos
+
+            # number of public traced and isolated
+            pos = public * test_trace
+            iso += pos
+            public -= pos
+
+        # symptomatic tracing
         if test_enabled and i >= test_time - 1:
 
             # find out who is testing positive - we only test people showing symptoms
@@ -619,20 +653,10 @@ def run_sim(parms):
             sick_cnt += pos
             public -= pos
 
-            # random testing
-            # pos = public * .001
-            # iso += pos
-            # sick_cnt += pos
-            # public -= pos
-
             # number of public traced and isolated
             pos = public * test_trace
             iso += pos
             public -= pos
-
-
-            # number of public not traced
-            # public *= (1 - test_trace)
 
         # here try to count hospital beds and deaths
         # and add up total costs
@@ -731,7 +755,8 @@ def run_sim(parms):
     outpf(pbuf2)
     outpf(pbuf3)
     outpf(pbuf_end)
-    fout.close()
+    if fout:
+        fout.close()
 
     #  #########################################################
 
