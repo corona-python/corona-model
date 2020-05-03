@@ -1,2 +1,2 @@
 # corona-model
-Simple whatif modeling
+What if you could change how the world responded to the Corona virus?
