@@ -42,3 +42,7 @@ of this code and any derived code
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
  
  ### _Which response has the least severe economic impact?_
+ 
+ ## What if it takes 5 days for test results?
+![USA Five Days](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_5_no_random.png)
+ 
