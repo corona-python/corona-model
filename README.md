@@ -4,7 +4,10 @@
 [Release  ](https://github.com/corona-python/corona-model/releases)
 [Presentation  ](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
-What if you could change how the world responded to the Corona virus?
+# What if you could change how the world responded to the Corona virus?
+
+## Options
+![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
 
 This program is intended to explore the political choices available to confront a pandemic.
 Each choice involves a policy decision that has life and death consequences. 
@@ -30,9 +33,6 @@ Test tracing is weighted inversely by days to results.
 
 This code may be modified and distributed freely as long as this header is included at the top
 of this code and any derived code
-
-## Options
-![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
 
 ## USA Current Trend
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
