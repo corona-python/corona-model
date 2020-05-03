@@ -50,14 +50,15 @@ of this code and any derived code
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_no_random.png)
 
  ## Then, what if we add just 0.1% random testing of the population?
- ### With better testing after lockdown ends, we'd save 80,000 lives
+ ### With better testing after lockdown ends, we'd save 80,000 lives.
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
 
  ## What if we responded more aggresively, 30 days earlier?
- ### We could have flattened the curve
+ ### We could have flattened the curve.
  ![Faster Response](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/fast.png)
 
 
 ## My USA model may be optimistic, we are not flattening the curve as of May 3
-### [Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
+### At least growth in cases appears more linear.
+[Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
