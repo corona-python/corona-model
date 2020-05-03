@@ -16,7 +16,7 @@ Each choice involves a policy decision that has life and death consequences.
 - Do we focus on early containment/mitigation or gamble with the hope that it will just go away?
 - How many deaths will occur as a result of our decision?
 
-* Hover over menu items to see a brief description of parameters *
+_Hover over menu items to see a brief description of parameters_
 
 Influential Parameters:
 - Percent sick traced outside lockdown
