@@ -1,9 +1,6 @@
 # corona-model
 What if you could change how the world responded to the Corona virus?
 
-Screenshots:
-https://github.com/corona-python/corona-model/wiki
-
 Python and Windows Exe:
 https://github.com/corona-python/corona-model/releases
 
