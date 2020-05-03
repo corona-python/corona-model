@@ -10,7 +10,7 @@
 ![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
 
 This program is intended to explore the political choices available to confront a pandemic.
-Each choice involves a policy decision that has life and death consequences. 
+Each choice involves a policy decision that has life or death consequences. 
 - Do we spend tax money on testing or do we give tax breaks to the rich in an election year?
 - Do we focus on early containment/mitigation or gamble with the hope that it will just go away?
 - How many deaths will occur as a result of our decision?
