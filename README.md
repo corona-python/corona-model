@@ -1,6 +1,5 @@
 # corona-model
 
-[Wiki  ](https://github.com/corona-python/corona-model/wiki)
 [Download  ](https://github.com/corona-python/corona-model/releases)
 [Presentation  ](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
