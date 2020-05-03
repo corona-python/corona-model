@@ -58,4 +58,5 @@ of this code and any derived code
  ![Faster Response](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/fast.png)
 
 
-
+## My USA model may be optimistic, we are not flattening the curve as of May 3
+![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
