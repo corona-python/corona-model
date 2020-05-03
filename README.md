@@ -1,6 +1,6 @@
 # corona-model
 
-Downloads
+Downloads:
 [Source and Exe, ](https://github.com/corona-python/corona-model/releases)
 [Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
