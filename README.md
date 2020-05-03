@@ -37,6 +37,7 @@ of this code and any derived code
 ## USA Current Trend
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
-## Taiwan Current Trend - How?
+## Taiwan Current Trend
+### 43 Million People, Few Deaths, What Did They Do Differently?
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
  
