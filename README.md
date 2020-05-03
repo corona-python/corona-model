@@ -41,4 +41,4 @@ of this code and any derived code
 ### 43 Million People, Few Deaths, What Did They Do Differently?
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
  
- ### Which model has the least severe economic impact?
+ ### _Which model has the least severe economic impact?_
