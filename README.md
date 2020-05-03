@@ -35,4 +35,4 @@ Test tracing is weighted inversely by days to results.
 This code may be modified and distributed freely as long as this header is included at the top
 of this code and any derived code
 
-
+<https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG>
