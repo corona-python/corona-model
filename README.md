@@ -4,7 +4,7 @@
 [Release  ](https://github.com/corona-python/corona-model/releases)
 [Presentation  ](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
-# What if you could change how the world responded to the Corona virus?
+# What if you could change the world?
 
 ## Options
 ![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
