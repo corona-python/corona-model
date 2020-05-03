@@ -58,8 +58,7 @@ of this code and any derived code
 
 
 ## My USA model may be optimistic, we are not flattening the curve as of May 3
-### At least, at this point, thanks to lockdown, case growth appears more linear than exponential.
-When lockdown is lifted, without deployment of lessons learned (testing, etc) we will go back to exponential.
+At least, at this point, thanks to lockdown, case growth appears more linear than exponential. When lockdown is lifted, without deployment of lessons learned (testing, etc), we will go back to exponential.
 
 [Image: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
