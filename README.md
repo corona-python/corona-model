@@ -50,5 +50,6 @@ of this code and any derived code
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_no_random.png)
 
  ## Then, what if we add just 0.1% random testing of the population?
+ ### With better testing after lockdown ends, we'd save 80,000 lives
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
 
