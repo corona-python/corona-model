@@ -1,11 +1,10 @@
 # corona-model
-What if you could change how the world responded to the Corona virus?
 
 [Wiki](https://github.com/corona-python/corona-model/wiki)
-
 [Release](https://github.com/corona-python/corona-model/releases)
-
 [Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
+
+What if you could change how the world responded to the Corona virus?
 
 This program is intended to explore the political choices available to confront a pandemic.
 Each choice involves a policy decision that has life and death consequences. 
