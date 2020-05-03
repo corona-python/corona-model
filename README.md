@@ -45,4 +45,10 @@ of this code and any derived code
  
  ## What if it takes 5 days for test results?
 ![USA Five Days](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_5_no_random.png)
- 
+
+ ## Or 1 Day?
+![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_no_random.png)
+
+ ## Then, what if we add just 0.1% random testing of the population?
+![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
+
