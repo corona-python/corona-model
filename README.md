@@ -5,7 +5,8 @@ Downloads:
 [Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
 # What if you could change the world?
-
+Note: this model is being updated frequently as policies change, features are added and bugs are discovered. 
+Check back often for latest updates.
 ## Options
 ![Options](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/options.PNG)
 
@@ -64,7 +65,7 @@ At least, at this point, thanks to lockdown, case growth appears more linear tha
 [Image: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
 
-## Limitations
+## Discussion/Limitations
 #### Simulation Time Delta
 I've used a very simple infection model, R infections per day per person. Once R infections have spread by a single source, 
 the source no longer infects. This is reasonable in the average of 330 Million people. An interesting experiment is to 
@@ -74,7 +75,9 @@ lockdown, tracing, etc remain consistent.
 #### True Number of Cases
 Things get interesting here. While the replication factor changes as mitigation and containment measure are introduced, 
 I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any reasonable model based on puublished number of cases. 
-In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I may re-calibrate the model based on 4X reported cases instead of 2X as shown here.
+In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I may re-calibrate the model based on 4X reported cases instead of 2X as shown here. As of May 4, news outlets are reporting that the true number could be as
+much as 10X what is being officially reported. This uncertainty is due to the lack of testing in USA. Without routine testing, we can only make our best guess as to the true numbers, however, this is mostly a problem with the absolute values being reported. Differential
+trends as a reaction to policy implementations (testing, lockdown, etc) will be mostly unaffected. Confused and frustrated by the lack of a comprehensive federal plan for testing? Me too.
 
 #### Attack/Decay
 How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses separate 
