@@ -77,8 +77,8 @@ I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any r
 In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I may re-calibrate the model based on 4X reported cases instead of 2X as shown here.
 
 #### Attack/Decay
-How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses
-a simple filter to emulate a 
+How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses separate 
+filters to emulate transition time to and from lockdown.
 
 
 
