@@ -63,3 +63,22 @@ At least, at this point, thanks to lockdown, case growth appears more linear tha
 
 [Image: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
+
+## Limitations
+#### Simulation Time Delta
+I've used a very simple infection model, R infections per day per person. Once R infections have spread by a single source, 
+the source no longer infects. This is reasonable in the average of 330 Million people. An interesting experiment is to 
+randomize the R value and you will find that chance can have a dramatic impact, however the trends for testing, 
+lockdown, tracing, etc remain consistent.
+
+#### True Number of Cases
+Things get interesting here. While the replication factor changes as mitigation and containment measure are introduced, 
+I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any reasonable model based on puublished number of cases. 
+In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I may re-calibrate the model based on 4X reported cases instead of 2X as shown here.
+
+#### Attack/Decay
+How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses
+a simple filter to emulate a 
+
+
+
