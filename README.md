@@ -53,8 +53,8 @@ of this code and any derived code
 ## We Are Not Significantly Flattening the Curve
 At least, at this point, thanks to lockdown, case growth appears more linear than exponential. When lockdown is lifted, without deployment of lessons learned (testing, etc), we will go back to exponential.
 
-[May 3: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
-![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
+[May 9: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
+![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may9.png)
 
 ## Discussion/Limitations
 #### Simulation Time Delta
