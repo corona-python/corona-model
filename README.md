@@ -41,8 +41,9 @@ of this code and any derived code
 ## Taiwan Current Trend
 ### 43 Million People, Few Deaths, What Did They Do Differently?
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
- 
- ### _Which response has the least severe economic impact?_
+
+## Fast Test Results and Isolation Could Eliminate Need for General Lockdown
+![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
  
  ## What if it takes 5 days for test results?
 ![USA Five Days](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_5_no_random.png)
@@ -53,8 +54,6 @@ of this code and any derived code
  ## Then, what if we add just 0.1% random testing of the population?
  ### With better testing after lockdown ends, we'd save 80,000 lives.
 ![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
-
-![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
 
  ## What if we responded more aggresively, 30 days earlier?
  ### We could have flattened the curve.
