@@ -62,11 +62,11 @@ lockdown, tracing, etc remain consistent.
 
 #### True Number of Cases
 Things get interesting here. While the replication factor changes as mitigation and containment measure are introduced, 
-I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any reasonable model based on puublished number of cases. 
+I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any reasonable model based on published number of cases. 
 In my opinion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. In the latest model, I have re-calibrated  to approximately 3X instead of 2X as shown earlier. As of May 4, news outlets are reporting that the true number could be as much as 10X government figures. This uncertainty is due to the lack of testing in USA. Without routine testing, we can only make our best guess as to the true numbers, however, this is primarily a problem with the absolute numbers being reported. Differential trends as a reaction to policy implementations (testing, lockdown, etc) will be largely unaffected. Confused and frustrated by the lack of a comprehensive federal plan for testing? Me too.
 
 #### How Do We Model Transitions?
-How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses simple recursive sections to emulate transition times ( lockdown, testing, etc).
+How quickly the transitions to and from lockdown occur can have a major impact on the number of infections. The model uses simple recursive sections to emulate transition times ( lockdown, testing, etc).
 
 #### Days to Test Result
 The percentage of people isolated after coming in contact with an infected person is attenuated by a "forgetting factor" determined by 1/N where N = number of days waiting for test results. 
