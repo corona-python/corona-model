@@ -39,7 +39,7 @@ of this code and any derived code
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
 ### What If We Started Testing Earlier ?
-### With better testing at start of lockdown, we'd save over 100,000 lives.
+#### With better testing at start of lockdown, we'd save over 100,000 lives.
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
 ## Taiwan Current Trend
