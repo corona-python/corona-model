@@ -18,7 +18,7 @@ Python: 3.8, Menus: PySimpleGUI, Plots: matplotlib, Windows Exe: Pyinstaller
 Build: pyinstaller -w -F --hidden-import="pkg_resources.py2_warn" corona.py
 
 This program is intended to explore the political choices available to confront a pandemic.
-Each choice involves a policy decision that has life and death consequences. 
+Each choice involves a policy decision that has life or death consequences. 
 - Do we spend tax money on testing or do we give tax breaks to the rich in an election year?
 - Do we focus on early containment/mitigation or gamble with the hope that it will just go away?
 - How many deaths will occur as a result of our decision?
@@ -84,17 +84,26 @@ def outf(s):
 def get_defaults():
     defs = {
         'Outside Lockdown': {
-            'response_model': {'val': 'Political (USA)', 'tip': 'How will we prioritize the response?',
-                               'drop': ['Political (USA)', 'Slow Medical', 'Fast Medical', 'Aggressive (Taiwan)', 'No Response']},
-            'percent_sick_traced': {'val': .1, 'tip': 'From the symptomatic population, how many contacts can be traced and isolated?'},
-            'allow_testing': {'val': False, 'tip': 'Will we routinely test sick people?'},
-            'allow_learning': {'val': False, 'tip': 'Will update our response protocol later?'},
-            'allow_lockdown': {'val': False, 'tip': 'Will we lockdown population based on trend data?'},
-            'show_virus': {'val': False, 'tip': 'Show replication rate, scale factors, event onset, etc'},
-            'show_health_care': {'val': False, 'tip': 'Show health care parameters'},
-            'plot_cumulative_cases': {'val': False, 'tip': 'Are we flattening the curve?'},
+            'response_model': {'val': 'Political (USA)', 'tip': 'Baseline response model.',
+                               'drop': {
+                                   'Political (USA)': None,
+                                   'Medical (Slower)': None,
+                                   'Medical (Faster)': None,
+                                   'Medical (Taiwan)': None,
+                                   'No Response': None}},
+            'response_speed': {'val': 'slow', 'tip': 'How quickly we deploy our response.',
+                               'drop': {'slow': .995, 'medium': .99, 'fast': .987}},
+            'percent_sick_traced': {'val': .10, 'tip': 'Percentage of contacts from suspected cases, traced and isolated.'},
+            'pst_attack': {'val': 'medium', 'hide': True, 'attack': {'slow': .93, 'medium': .915, 'fast': .85}},
+            'allow_testing': {'val': True, 'tip': 'Allow routine tests of people with symptoms?'},
+            'allow_learning': {'val': False, 'tip': 'Have we learned anything that we can apply in the future?'},
+            'allow_lockdown': {'val': True, 'tip': 'Allow lockdown as a strategy?'},
+            'end_sim': {'val': 'auto', 'tip': 'When do end simulation?',
+                        'drop': {'auto': 0, '180 days': 180, '360 days': 360, '540 days': 540, '720 days': 720}},
+            'show_virus': {'val': False, 'tip': 'Show virus parameters.'},
+            'show_health_care': {'val': False, 'tip': 'Show health care parameters.'},
+            'plot_cumulative_cases': {'val': False, 'tip': 'Are we flattening the infection curve?'},
             'plot_new_cases': {'val': False, 'tip': 'Plot the new cases being discovered'},
-            'plot_hospital_beds': {'val': False, 'tip': 'Plot the number of hospital beds being used'},
             'create_corona_csv': {'val': False, 'tip': 'Output corona.csv file in current directory'},
             'meta': {
                 'title': 'Political Parameters',
@@ -110,32 +119,34 @@ def get_defaults():
         'Lockdown Parameters': {
             'days_of_denial': {'val': 60, 'tip': 'The minimum number of days we wait before invoking lockdown.'},
             'percent_isolated': {'val': .75, 'tip': 'Percentage of people who isolate themselves during lockdown.'},
-            'days_of_trend_needed': {'val': 30, 'tip': 'Days of trending data are needed before changing lockdwn state.'},
+            'days_of_trend_needed': {'val': 30, 'tip': 'Days of trending data are needed before changing lockdown state.'},
             'days_min_duration': {'val': 30, 'tip': 'Minimum  number of days for a lockdown.'},
-            'case_threshold': {'val': 2500, 'tip': 'Maximum number of cases to end lockdown.'},
-            'forced_ending': {'val': False, 'tip': 'Do we end lockdown regardless of of the trend or number of cases?'},
-            'attack': {'val': .97, 'tip': 'How fast do we enter lockdown (higher is slower)?'},
-            'decay': {'val': .97, 'tip': 'How fast do we exit lockdown (higher is slower)?'},
+            'case_threshold': {'val': 1000, 'tip': 'Maximum number of cases to end lockdown.'},
+            'forced_ending': {'val': True, 'tip': 'Do we end lockdown regardless of of the trend or number of cases?'},
             'meta': {
                 'parent': 'Outside Lockdown'
             }
         },
         'Testing Parameters': {
-            'days_to_deploy': {'val': 0, 'tip': 'Days before deploying testing?'},
+            'days_to_deploy': {'val': 0, 'tip': 'Days before routine testing begins?'},
+            'test_attack': {'val': 'slow', 'hide': True, 'attack': {'slow': .93, 'medium': .915, 'fast': .9}},
             'days_before_result': {'val': 5, 'tip': 'Days before test results.'},
             'percent_random_tested': {'val': 0.0, 'tip': 'Number of random people tested'},
-            'percent_sick_tested': {'val': .001, 'tip': 'Percent of people showing symptoms being tested.'},
+            'percent_sick_tested': {'val': .1, 'tip': 'Percentage of people tested who show milder symptoms.'},
             'percent_accuracy': {'val': .8, 'tip': 'Percentage of accurate positive test results.'},
-            'percent_pos_traced': {'val': .25, 'tip': 'Percentage of contacts from positive test case that can be isolated?'},
+            'percent_pos_traced': {'val': .25, 'tip': 'Percentage of contacts from positive test case, traced and isolated.'},
             'meta': {
                 'parent': 'Outside Lockdown'
             }
         },
         'Lessons Learned': {
-            'days_to_deploy': {'val': 0, 'tip': 'Days before deploying any lessons learned.'},
-            'percent_sick_traced': {'val': .2, 'tip': 'From people who are sick, how many contacts can we isolate?'},
-            'allow_lockdown': {'val': True, 'tip': 'Can we lockdown as part of lessons learned?'},
-            'allow_testing': {'val': False, 'tip': 'Can we test as part of lessons learned?'},
+            'response_speed': {'val': 'slow', 'tip': 'How fast do we deploy lessons learned?',
+                               'drop': {'slow': .9975, 'medium': .995, 'fast': .9875}},
+            'days_to_deploy': {'val': 0, 'tip': 'Days before we start deploying any lessons learned.'},
+            'percent_sick_traced': {'val': .1, 'tip': 'Percentage of contacts from suspected cases, traced and isolated.'},
+            'pst_attack': {'val': 'medium', 'hide': True, 'attack': {'slow': .93, 'medium': .915, 'fast': .9}},
+            'allow_lockdown': {'val': False, 'tip': 'Can we lockdown as part of lessons learned?'},
+            'allow_testing': {'val': True, 'tip': 'Can we test as part of lessons learned?'},
             'meta': {
                 'children': {
                     'Testing Lessons Learned': 'allow_testing',
@@ -145,20 +156,21 @@ def get_defaults():
             }
         },
         'Lockdown Lessons Learned': {
-            'days_of_denial': {'val': 0, 'tip': 'Minimum number of days we wait before invoking lockdown after lessons learned.'},
-            'percent_isolated': {'val': .75, 'tip': 'Percentage of people observing isolation during lockdown after lessons learned?'},
-            'days_of_trend_needed': {'val': 14, 'tip': 'How many days of infection trend data needed to change state of lockdown?'},
-            'forced_ending': {'val': False, 'tip': 'Do we force lockdown to end regardless of case load or trend?'},
+            'days_of_denial': {'val': 0, 'tip': 'Minimum number of days we wait before invoking lockdown.'},
+            'percent_isolated': {'val': .75, 'tip': 'Percentage of people observing isolation during lockdown.'},
+            'days_of_trend_needed': {'val': 14, 'tip': 'Days of infection trend data needed to change state of lockdown.'},
+            'forced_ending': {'val': False, 'tip': 'End lockdown regardless of case load or trend.'},
             'meta': {
                 'parent': 'Lessons Learned'
             }
         },
         'Testing Lessons Learned': {
-            'days_before_result': {'val': 3, 'tip': 'Days before test result known'},
-            'percent_random_tested': {'val': .001, 'tip': 'Number of random people tested'},
-            'percent_sick_tested': {'val': .001, 'tip': 'Number of people with symptoms tested'},
-            'percent_accuracy': {'val': .8, 'tip': 'Percent of positive tests correctly identified'},
-            'percent_pos_traced': {'val': .25, 'tip': 'Percent of contacts isolated when someone tests positive'},
+            'test_attack': {'val': 'slow', 'hide': True, 'attack': {'slow': .93, 'medium': .915, 'fast': .9}},
+            'days_before_result': {'val': 5, 'tip': 'Days before test result known.'},
+            'percent_random_tested': {'val': 0.0, 'tip': 'Percentage of people tested regardless of symptoms.'},
+            'percent_sick_tested': {'val': .1, 'tip': 'Percentage of symptomatic people tested.'},
+            'percent_accuracy': {'val': .8, 'tip': 'Percentage of accurate positive test results.'},
+            'percent_pos_traced': {'val': .25, 'tip': 'Percentage of contacts from positive test case, traced and isolated?'},
             'meta': {
                 'parent': 'Lessons Learned'
             }
@@ -167,42 +179,40 @@ def get_defaults():
             'date_start': {'val': '1/31/2020', 'tip': 'Not recommended to change.'},
             'days_before_symptoms': {'val': 5, 'tip': 'Not recommended to change.'},
             'days_before_free': {'val': 21, 'tip': 'Not recommended to change.'},
-            'percent_with_symptoms': {'val': .8, 'tip': 'Not recommended to change.'},
-            'percent_with_mild_symptoms': {'val': .5, 'tip': 'Not recommended to change.'},
-            'r0': {'val': 1.65, 'tip': 'Not recommended to change.'},
+            'percent_with_symptoms': {'val': .5, 'tip': 'Percentage of people showing symptoms.'},
+            'percent_with_mild_symptoms': {'val': .8, 'tip': 'Percentage of people showing mild symptoms.'},
+            'r0': {'val': 1.3825, 'tip': 'Not recommended to change.'},
             'r0_random': {'val': False, 'tip': 'Not recommended to change.'},
-            'r0_jitter': {'val': .005, 'tip': 'Not recommended to change.'},
-            'r_range': {'val': .5, 'tip': 'Not recommended to change.'},
-            'r_offset': {'val': .25, 'tip': 'Not recommended to change.'},
+            'r0_jitter': {'val': .001, 'tip': 'Not recommended to change.'},
             'meta': {
                 'parent': 'Outside Lockdown'
             }
         },
         'Health Care': {
-            'percent_dr_visit': {'val': .2, 'tip': 'How many symptomatic people visit doctor''s office?'},
-            'percent_er_visit': {'val': .05, 'tip': 'How many symptomatic people visit the ER?'},
-            'percent_symptom_admit': {'val': .2, 'tip': 'How many symptomatic people are admitted to hospital?'},
-            'days_before_admit': {'val': 10, 'tip': 'How many days before symptomatic people enter hospital?'},
-            'days_admit_duration': {'val': 6, 'tip': 'How many days do people spend in hospital?'},
-            'percent_symptom_death': {'val': .055, 'tip': 'How many symptomatic people die?'},
-            'cost_admit_per_day': {'val': 8000, 'tip': 'What is daily cost of hospital stay?'},
-            'cost_dr_visit': {'val': 400, 'tip': 'What is cost of DR office visit?'},
-            'cost_er_visit': {'val': 5000, 'tip': 'What is cost of ER visit?'},
-            'cost_death': {'val': 10000, 'tip': 'What is cost of death?'},
+            'percent_dr_visit': {'val': .2, 'tip': 'Percentage of symptomatic people who visit doctor''s office.'},
+            'percent_er_visit': {'val': .05, 'tip': 'Percentage of symptomatic people who visit the ER.'},
+            'percent_symptom_admit': {'val': .2, 'tip': 'Percentage of symptomatic people admitted to hospital.'},
+            'days_before_admit': {'val': 10, 'tip': 'Days before symptomatic people enter hospital.'},
+            'days_admit_duration': {'val': 6, 'tip': 'Days spent admitted in hospital.'},
+            'percent_symptom_death': {'val': .02, 'tip': 'Percentage of symptomatic people who die.'},
+            'cost_admit_per_day': {'val': 8000, 'tip': 'Daily cost of hospital stay.'},
+            'cost_dr_visit': {'val': 400, 'tip': 'Cost of DR office visit.'},
+            'cost_er_visit': {'val': 5000, 'tip': 'Cost of ER visit'},
+            'cost_death': {'val': 10000, 'tip': 'Cost of death.'},
             'meta': {
                 'parent': 'Outside Lockdown'
             }
         }
     }
 
-    defs['Testing Parameters']['days_to_deploy']['val'] = defs['Lockdown Parameters']['days_of_denial']['val'] * 2
-    defs['Lessons Learned']['days_to_deploy']['val'] = defs['Lockdown Parameters']['days_of_denial']['val'] * 2
+    defs['Testing Parameters']['days_to_deploy']['val'] = defs['Lockdown Parameters']['days_of_denial']['val'] + defs['Lockdown Parameters']['days_min_duration']['val']
+    defs['Lessons Learned']['days_to_deploy']['val'] = defs['Lockdown Parameters']['days_of_denial']['val'] + defs['Lockdown Parameters']['days_min_duration']['val']
+    defs['Health Care']['percent_dr_visit']['val'] = 1 - defs['Virus Parameters']['percent_with_mild_symptoms']['val']
 
     return defs
 
 
 def set_model(model):
-
     defs = get_defaults()
 
     default = defs['Outside Lockdown']
@@ -215,32 +225,27 @@ def set_model(model):
 
     default['response_model']['val'] = model
 
-    if model == 'Political (USA)':
-        default['allow_learning']['val'] = True
-        default['allow_lockdown']['val'] = True
+    if model == 'Medical (Slower)':
+        default['response_speed']['val'] = 'slow'
+        default['allow_testing']['val'] = True
+        default['allow_learning']['val'] = False
+        ld['days_of_denial']['val'] = 45
         ld['forced_ending']['val'] = True
-        ld['attack']['val'] = .98
-        ll['allow_testing']['val'] = True
-        ll_ld['forced_ending']['val'] = True
-        ll_test['percent_random_tested']['val'] = 0.0
+        test['days_to_deploy']['val'] = 60
+        test['percent_sick_tested']['val'] = .1
 
-    elif model == 'Slow Medical':
-        default['allow_learning']['val'] = True
-        default['allow_lockdown']['val'] = True
-        ld['days_of_denial']['val'] = 60
-        ll['allow_testing']['val'] = True
-        ll['days_to_deploy']['val'] = 90
-        ll_test['percent_sick_tested']['val'] = .005
+    elif model == 'Medical (Faster)':
+        default['response_speed']['val'] = 'fast'
+        default['allow_testing']['val'] = True
+        default['allow_learning']['val'] = False
+        ld['days_of_denial']['val'] = 45
+        ld['forced_ending']['val'] = True
+        test['days_to_deploy']['val'] = 45
+        test['percent_sick_tested']['val'] = .1
+        test['percent_random_tested']['val'] = .01
 
-    elif model == 'Fast Medical':
-        default['allow_learning']['val'] = True
-        default['allow_lockdown']['val'] = True
-        ld['days_of_denial']['val'] = 30
-        ll['allow_testing']['val'] = True
-        ll['days_to_deploy']['val'] = 60
-        ll_test['percent_sick_tested']['val'] = .01
-
-    elif model == 'Aggressive (Taiwan)':
+    elif model == 'Medical (Taiwan)':
+        default['response_speed']['val'] = 'fast'
         default['percent_sick_traced']['val'] = .2
         default['allow_learning']['val'] = False
         default['allow_testing']['val'] = True
@@ -248,16 +253,31 @@ def set_model(model):
         ld['days_of_denial']['val'] = 14
         ld['percent_isolated']['val'] = .8
         ld['days_of_trend_needed']['val'] = 7
+        ld['case_threshold']['val'] = 50
+        ld['forced_ending']['val'] = False
+        ll['response_speed']['val'] = 'fast'
         test['days_to_deploy']['val'] = 21
         test['days_before_result']['val'] = 2
         test['percent_pos_traced']['val'] = .3
-        health['percent_symptom_death']['val'] = .03
+        test['percent_sick_tested']['val'] = .25
+        health['percent_symptom_death']['val'] = .02
+
+    elif model == 'No Response':
+        default['response_speed']['val'] = 'slow'
+        default['allow_testing']['val'] = False
+        default['allow_learning']['val'] = False
+        default['allow_lockdown']['val'] = False
 
     return defs
 
 
 def get_keys(dct, value):
     return [key for key in dct if (dct[key] == value)]
+
+
+def get_drop(sub, name):
+    mapped = sub[name]['drop'][sub[name]['val']]
+    return mapped if mapped != '' else name
 
 
 def run_sim(parms):
@@ -281,7 +301,16 @@ def run_sim(parms):
     response_model = default['response_model']['val']
 
     # percent of we find to isolate after contact with person showing symptoms
+    response_speed = get_drop(default, 'response_speed')
+
+    # percent of we find to isolate after contact with person showing symptoms
     percent_sick_traced = default['percent_sick_traced']['val']
+
+    # alpha to lift lockdown
+    pst_attack = default['pst_attack']['attack'][default['response_speed']['val']]
+
+    # how do we end sim
+    end_sim = get_drop(default, 'end_sim')
 
     # is testing enabled?
     test_allowed = default['allow_testing']['val']
@@ -310,11 +339,7 @@ def run_sim(parms):
     # number of cases must be less than this to lift
     ld_case_threshold = ld['case_threshold']['val']
 
-    # alpha to start lockdown
-    w1 = ld['attack']['val']
-
-    # alpha to lift lockdown
-    w2 = ld['decay']['val']
+    test_attack = test['test_attack']['attack'][default['response_speed']['val']]
 
     # days to deploy testing
     test_days_to_deploy = test['days_to_deploy']['val']
@@ -335,7 +360,9 @@ def run_sim(parms):
     test_percent_pos_traced = test['percent_pos_traced']['val']
 
     # after first lockdown, improved tracing and detection
+    ll_response_speed = get_drop(ll, 'response_speed')
     ll_percent_sick_traced = ll['percent_sick_traced']['val']
+    ll_pst_attack = ll['pst_attack']['attack'][ll['response_speed']['val']]
     ll_days_to_deploy = ll['days_to_deploy']['val']
     ll_ld_allowed = ll['allow_lockdown']['val']
     ll_ld_days_of_denial = ll_ld['days_of_denial']['val']
@@ -343,6 +370,7 @@ def run_sim(parms):
     ll_ld_percent_isolated = ll_ld['percent_isolated']['val']
     ll_ld_forced_ending = ll_ld['forced_ending']['val']
     ll_test_allowed = ll['allow_testing']['val']
+    ll_test_attack = ll_test['test_attack']['attack'][ll['response_speed']['val']]
     ll_test_percent_pos_traced = ll_test['percent_pos_traced']['val']
     ll_test_days_before_result = ll_test['days_before_result']['val']
     ll_test_percent_accuracy = ll_test['percent_accuracy']['val']
@@ -351,29 +379,31 @@ def run_sim(parms):
 
     pbuf1 = ""
     pbuf1 += "Baseline Response: {}\n".format(response_model)
-    pbuf1 += "  Percent Sick Traced: {0:0.4f}\n".format(percent_sick_traced)
+    pbuf1 += "Response Speed: {0}, w: {1:.3f}\n".format(default['response_speed']['val'], response_speed)
+    pbuf1 += "  Percent Sick Traced: {0:0.3f}, w: {1:0.3f}\n".format(percent_sick_traced, pst_attack)
+    pbuf1 += "  End Sim: {}".format(end_sim)
     if not ld_allowed:
         pbuf1 += "  No Lockdown\n"
     else:
         pbuf1 += "  Denial Before Lockdown: {0}\n".format(ld_days_of_denial)
         pbuf1 += "  Lockdown Duration: {0}\n".format(ld_days_duration)
         pbuf1 += "  Days Trend Before Change: {0}\n".format(ld_days_of_trend_needed)
-        pbuf1 += "  Isolated: {0:0.4f}\n".format(ld_percent_isolated)
+        pbuf1 += "  Isolated: {0:0.3f}\n".format(ld_percent_isolated)
         pbuf1 += "  Forced Ending: {0}\n".format(ld_forced_ending)
         pbuf1 += "  Begin/End Case Threshold: {0}\n".format(ld_case_threshold)
-        pbuf1 += "  Attack/Decay: {0:.4f} / {1:.4f}\n".format(w1, w2)
     if not test_allowed:
         pbuf1 += "  No Initial Testing\n"
     else:
         pbuf1 += "  Days to Deploy Testing: {}\n".format(test_days_to_deploy)
-        pbuf1 += "  Test Accuracy: {0}\n".format(test_percent_accuracy)
+        pbuf1 += "  Attack: {0:.3f}\n".format(test_attack)
+        pbuf1 += "  Test Accuracy: {}, Wait: {}\n".format(test_percent_accuracy, test_days_before_result)
         pbuf1 += "  Tested, Random {},  Sick {}\n".format(test_percent_random_tested, test_percent_sick_tested)
-        pbuf1 += "  Result Wait {}\n".format(test_days_before_result)
-        pbuf1 += "  Isolated, Adj by Wait: {0:0.4f}\n".format(test_percent_pos_traced / test_days_before_result)
+        pbuf1 += "  Isolated: {0:0.4f}\n".format(test_percent_pos_traced)
 
     if ll_allowed:
         pbuf1 += "\nDays to Lessons Learned: {0}\n".format(ll_days_to_deploy)
-        pbuf1 += "  Sick Traced: {}\n".format(ll_percent_sick_traced)
+        pbuf1 += "  Response Speed: {0}, w: {1:0.3f}\n".format(ll['response_speed']['val'], ll_response_speed)
+        pbuf1 += "  Sick Traced: {0:0.3f}, w: {1:0.3f}\n".format(ll_percent_sick_traced, ll_pst_attack)
         if not ll_ld_allowed:
             pbuf1 += "  No Lockdown\n"
         else:
@@ -385,10 +415,10 @@ def run_sim(parms):
         if not ll_test_allowed:
             pbuf1 += "  No Testing\n"
         else:
-            pbuf1 += "  Test Accuracy: {0}\n".format(ll_test_percent_accuracy)
+            pbuf1 += "  Attack: {0:.3f}\n".format(ll_test_attack)
+            pbuf1 += "  Test Accuracy: {}, Wait: {}\n".format(ll_test_percent_accuracy, ll_test_days_before_result)
             pbuf1 += "  Tested, Random {},  Sick {}\n".format(ll_test_percent_random_tested, ll_test_percent_sick_tested)
-            pbuf1 += "  Result Wait {}\n".format(ll_test_days_before_result)
-            pbuf1 += "  Isolated, Adj by Wait: {0:0.4f}\n".format(ll_test_percent_pos_traced / ll_test_days_before_result)
+            pbuf1 += "  Isolated: {0:0.4f}\n".format(ll_test_percent_pos_traced)
     else:
         pbuf1 += "  No Lessons Learned\n"
 
@@ -400,29 +430,16 @@ def run_sim(parms):
     # days until no longer contagious
     days_before_free = virus['days_before_free']['val']
 
-    # percent who show symptoms
+    # percent who show any symptoms
     percent_with_symptoms = virus['percent_with_symptoms']['val']
 
-    # percent who get test for mild symptoms, wait for test results
-    # may not isolate or contact trace
-    percent_with_mild_symptoms = .5
-
-    # percent who have more severe symptoms, no test needed
-    # to suspect case, will self-isolate, will contact trace
-    # no waiting for results
-    percent_with_sev_symptoms = 1 - percent_with_mild_symptoms
-
-    # percent of all who show systems and end up in hospital
-    percent_with_hosp_symptoms = .2
+    # of those with symptoms, percent who show mild symptoms
+    percent_with_mild_symptoms = virus['percent_with_mild_symptoms']['val']
 
     # infection rate without symptoms
     r0 = virus['r0']['val']
     r0_random = virus['r0_random']['val']
     r0_jitter = virus['r0_jitter']['val']
-
-    # r_offset + r_range * x
-    r_offset = virus['r_offset']['val']
-    r_range = virus['r_range']['val']
     date_start = virus['date_start']['val']
 
     pbuf2 = ""
@@ -430,8 +447,8 @@ def run_sim(parms):
     pbuf2 += "  Start Date (m/d/y): {}\n".format(date_start)
     pbuf2 += "  Infections Per Day: {0}\n".format(r0)
     pbuf2 += "  Percent With Symptoms: {0}\n".format(percent_with_symptoms)
+    pbuf2 += "  Percent With Mild Symptoms: {0}\n".format(percent_with_mild_symptoms)
     pbuf2 += "  Days Before Free: {0}\n".format(days_before_free)
-    pbuf2 += "  USA Based R Scaling: {0} + {1} * x\n".format(r_offset, r_range)
     pbuf2 += "  Random: {0}, Jitter: {1}\n".format(r0_random, r0_jitter)
 
     # ###################  health care costs #################
@@ -470,7 +487,7 @@ def run_sim(parms):
     pbuf3 += "\nHealth Care\n"
     pbuf3 += "  Days Before Hospital Admit: {0}\n".format(days_before_admit)
     pbuf3 += "  Days in Hospital: {0}\n".format(days_admit_duration)
-    pbuf3 += "  Visit Dr Office: {0}, ${1} per visit\n".format(percent_dr_visit, cost_dr_visit)
+    pbuf3 += "  Visit Dr Office: {0:.2f}, ${1} per visit\n".format(percent_dr_visit, cost_dr_visit)
     pbuf3 += "  Visit ER: {0}, ${1} per visit\n".format(percent_er_visit, cost_er_visit)
     pbuf3 += "  Hospital: {0}, ${1} per day\n".format(percent_symptom_admit, cost_admit_per_day)
     pbuf3 += "  Dead: {0}, ${1} per death\n".format(percent_symptom_dead, cost_death)
@@ -478,49 +495,66 @@ def run_sim(parms):
     #############################################################
 
     public_list = list()
-    hosp_list = list()
-    tot_list = list()
+    admit_list = list()
+    sick_list = list()
+    inf_act_list = list()
     iso_list = list()
     ld_endx = list()
     ld_endy = list()
     ld_startx = list()
     ld_starty = list()
-    intro_list = list()
 
-    def_trace = r_offset + percent_sick_traced * r_range
-    test_trace = (r_offset + test_percent_pos_traced * r_range) / test_days_before_result
+    # scale tracing by how long needed to wait for result
+    test_trace = test_percent_pos_traced / test_days_before_result if test_days_before_result else test_percent_pos_traced
+    ll_test_trace = ll_test_percent_pos_traced / ll_test_days_before_result if ll_test_days_before_result else ll_test_percent_pos_traced
 
-    h = 0
-    sick_cnt = 0
-    itot = 1
-    ld = 0
+    # percent who have more severe symptoms, no test needed
+    # to suspect case, will self-isolate, will contact trace
+    percent_with_severe_symptoms = (1 - percent_with_mild_symptoms) * percent_with_symptoms
+
+    # milder symptoms, may get tested to confirm
+    percent_with_mild_symptoms *= percent_with_symptoms
+
+    admit_cum = 0
+    admit_act = 0
+    sick_act = 0
+    sick_cum = 0
+    dr_visit_cum = 0
+    er_visit_cum = 0
+    death_visit_cum = 0
+
+    inf_act = 1
+    ld = False
     ld_val = 0
     delta_cnt = 0
     ld_check = ld_days_of_denial
     last_stat = 0
-    er_visit = 0
-    dr_visit = 0
     hosp_admit = 0
-    death_visit = 0
     iso = 0
+    iso_act = 0
+
+    ld_state = 0
+    test_mild_state = 0
+    test_mild_trace = 0
+    test_rand_state = 0
+    test_rand_trace = 0
+    sev_sick_state = 0
+    sev_sick_trace = 0
+
     public = 1
-    iso_cnt = 0
     ll_enabled = 0
     ll_val = 0
-    end_it = 0
     end_cnt = 0
     tot_days = 0
     test_enabled = False
-    icum = 0
-    intro = 0
+    inf_cum = 0
     ev_day = event_day(date_start)
 
-    plot_itot = list()
+    plot_inf_act = list()
     plot_x = list()
     plot_dead = list()
     plot_iso = list()
-    plot_hosp = list()
-    plot_icum = list()
+    plot_inf_cum = list()
     plot_inew = list()
 
     test_time = test_days_to_deploy + days_before_symptoms + test_days_before_result
@@ -535,221 +569,229 @@ def run_sim(parms):
 
     for i in range(0, 730):
 
-        outp(
-            "end day: {0:4d}, infected: {1:10.2f}, hospital: {2:10.2f}, lockdown: {3:d}, r0: {4:1.3f}, iso: {5:10.2f}, public: {6:10.2f}, ld_cnt: {7:d}, trace: {8:0.4f} / {9:0.4f}".format(
-            i + 1, itot, h, delta_cnt, r0, iso_cnt, public, ld, test_trace, def_trace))
+        outf(
+            "end of: {0:4d}, inf: {1:10.2f}, hosp: {2:10.2f}, ld_delta: {3:d}, r0: {4:1.3f}, iso: {5:10.2f}, public: {6:10.2f}, ld_cnt: {7:d}, trace: {8:0.4f} / {9:0.4f}".format(
+                i + 1, inf_act, admit_act, delta_cnt, r0, iso_act, public, ld, test_trace, ld_state))
 
-        outf("{0:4d}, {1:10.2f}, {2:10.2f}, {3:10.2f}, {4:10.2f}".format(i + 1, itot, iso_cnt, h, ld_val))
+        outf("{0:4d}, {1:10.2f}, {2:10.2f}, {3:10.2f}, {4:10.2f}".format(i + 1, inf_act, iso_act, admit_act, ld_val))
 
-        # accumulate infections
-        itot += public + iso
-
-        # save this for removal later after no longer infectious
-        tot_list.append(public + iso)
-        icum += public + iso
-
-        # we count isolated per day
-        iso_cnt += iso
+        # accumulate isolated per day
+        iso_act += iso
         iso_list.append(iso)
-        iso = 0
 
-        # save number of new infections no symptoms
+        # current number of active infections
+        inf_new = public + iso
+        inf_act += inf_new
+        inf_act_list.append(inf_new)
+
+        # cumulative infections
+        inf_cum += public + iso
+
+        # save number of new infections, not isolated
         public_list.append(public)
 
         # our plot lists
-        plot_x.append(i+1)
-        plot_itot.append(itot)
-        plot_icum.append(icum)
-        plot_iso.append(iso)
-        plot_dead.append(death_visit)
-        plot_hosp.append(h)
-        plot_inew.append(public + iso)
+        plot_x.append(i)
+        plot_inf_act.append(inf_act)
+        plot_inf_cum.append(inf_cum)
+        plot_iso.append(iso_act)
+        plot_dead.append(death_visit_cum)
+        plot_inew.append(inf_new)
 
-        if not test_enabled and test_allowed and i >= test_time - 1:
+        # start of new day
+        iso = 0
+        if r0_random:
+            r0 = random.uniform(r0 - r0_jitter, r0 + r0_jitter)
+        public *= r0
+
+        if not test_enabled and test_allowed and i >= test_time:
             test_enabled = True
 
-        if not ll_enabled and ll_allowed and i >= ll_days_to_deploy - 1:
-            outp("========== deploy lessons learned {} {}==========".format(i, itot))
+        if not ll_enabled and ll_allowed and i >= ll_days_to_deploy:
+            outp("========== deploy lessons learned {} {}==========".format(i, ld, inf_act))
 
-            test_trace = (r_offset + test_percent_pos_traced * r_range) / ll_test_days_before_result
             percent_sick_traced = ll_percent_sick_traced
+            pst_attack = ll_pst_attack
 
             if ll_ld_allowed:
-                ld_check += ll_ld_days_of_denial - ld_days_of_denial
+                ld_check = i + ll_ld_days_of_denial
                 ld_days_of_denial = ll_ld_days_of_denial
                 ld_days_of_trend_needed = ll_ld_days_of_trend_needed
                 ld_percent_isolated = ll_ld_percent_isolated
                 ld_forced_ending = ll_ld_forced_ending
+                ld_allowed = True
+            else:
+                ld_allowed = False
 
             if ll_test_allowed:
-                test_percent_pos_traced = ll_test_percent_pos_traced
+                test_trace = ll_test_trace
+                test_attack = ll_test_attack
                 test_percent_random_tested = ll_test_percent_random_tested
                 test_percent_sick_tested = ll_test_percent_sick_tested
                 test_percent_accuracy = ll_test_percent_accuracy
                 test_time = ll_days_to_deploy + days_before_symptoms + ll_test_days_before_result
                 test_enabled = True
-
-            if ld:
-                def_trace = r_offset + ld_percent_isolated * r_range
             else:
-                def_trace = r_offset + percent_sick_traced * r_range
+                test_enabled = False
 
-            ll_val = itot
+            ll_val = inf_act
             ll_enabled = 1
 
-        # self-isolation and tracing
-        if i >= days_before_symptoms - 1:
+        # find out how many we isolate during lockdown
+        if ld:
+            x = ld_percent_isolated
+        else:
+            x = 0
 
+        ld_state = response_speed * ld_state + (1 - response_speed) * x
+        x = public * ld_state
+        iso += x
+        public -= x
+
+        # self-isolation and tracing
+        if i >= days_before_symptoms:
             # People who self-isolate due to more severe symptoms
             # that clearly indicate infection. we assume
             # some contacts will be traced and found and isolated.
             # even though they may go to dr, the symptoms clearly
             # indicate suspected case, test may be pos later, but
-            # isolation begins now.
-            sick_cnt = public * percent_with_symptoms * percent_with_sev_symptoms
+            # isolation begins now, no test needed. Note severe
+            # doesn't nec mean bad enough for hospital,
+            x = percent_with_severe_symptoms
+            sev_sick_state = pst_attack * sev_sick_state + (1 - pst_attack) * x
 
-            # find out how many we isolate
-            # scale to match country data
-            if ld:
-                x = r_offset + ld_percent_isolated * r_range
-                def_trace = w1 * def_trace + (1 - w1) * x
-            else:
-                x = r_offset + percent_sick_traced * r_range
-                def_trace = w2 * def_trace + (1 - w2) * x
+            x = percent_sick_traced
+            sev_sick_trace = pst_attack * sev_sick_trace + (1 - pst_attack) * x
 
-            # number of public traced and isolated
-            iso += public * def_trace
-
-            # number of public not isolated
-            public *= (1 - def_trace)
-
-            # public += .5
-
-            # put back on list
-            public_list.insert(0, public)
-
-        # random testing and tracing of asymptomatic
-        if test_percent_random_tested:
-
-            # find out who is testing positive - we only test people showing symptoms
-            # this emulates a person with milder symptoms who goes to dr and gets routine test
-            pos = public * test_percent_random_tested * test_percent_accuracy
-            iso += pos
-            sick_cnt += pos
-            public -= pos
-
-            # number of public traced and isolated
-            pos = public * test_trace
+            pos = public * (sev_sick_state + sev_sick_trace)
             iso += pos
             public -= pos
 
-        # symptomatic tracing
-        if test_enabled and i >= test_time - 1:
+        # random test and trace
+        if test_enabled and test_percent_random_tested:
+            # ramp up testing
+            x = test_percent_random_tested * test_percent_accuracy
+            test_rand_state = test_attack * test_rand_state + (1 - test_attack) * x
 
-            # find out who is testing positive - we only test people showing symptoms
-            # this emulates a person with milder symptoms who goes to dr and gets routine test
-            pos = public * test_percent_sick_tested * test_percent_accuracy * percent_with_symptoms * percent_with_mild_symptoms
+            # ramp up tracing
+            x = test_trace
+            test_rand_trace = test_attack * test_rand_trace + (1 - test_attack) * x
+
+            # number who test positive and need to be isolated
+            pos = public * (test_rand_state + test_rand_trace)
             iso += pos
-            sick_cnt += pos
             public -= pos
 
-            # number of public traced and isolated
-            pos = public * test_trace
+        # symptomatic test and trace (mild)
+        if test_enabled and i >= test_time:
+            # number of people showing positive results and isolated
+            x = percent_with_mild_symptoms * test_percent_sick_tested * test_percent_accuracy
+            test_mild_state = test_attack * test_mild_state + (1 - test_attack) * x
+
+            # ramp up tracing
+            x = test_trace
+            test_mild_trace = test_attack * test_mild_trace + (1 - test_attack) * x
+
+            # number who test positive and need to be isolated
+            pos = public * (test_mild_state + test_mild_trace)
             iso += pos
             public -= pos
+
+        # update our health stats
+        sick_list.append(public * percent_with_symptoms)
+        sick_act += public * percent_with_symptoms
+        sick_cum += sick_act
 
         # here try to count hospital beds and deaths
         # and add up total costs
-        if i >= days_before_admit - 1:
+        if i >= days_before_admit:
 
-            # number who will die
-            # dead_cnt = sick * percent_symptom_dead
-            # death_visit += dead_cnt
-            death_visit = icum * percent_symptom_dead * percent_with_symptoms
+            # cumulative er visits
+            er_visit_cum = sick_cum * percent_er_visit
 
-            # er visits
-            er_visit += sick_cnt * percent_er_visit
+            # cumulative dr visits
+            dr_visit_cum = sick_cum * percent_dr_visit
 
-            # dr visits
-            dr_visit += sick_cnt * percent_dr_visit
+            # cumulative number who will die
+            death_visit_cum = dr_visit_cum * percent_symptom_dead
 
             # add in those on iso list
-            admit = sick_cnt * percent_symptom_admit
+            admit_act = sick_act * percent_symptom_admit
 
             # add to hospital list
-            hosp_list.append(admit)
+            admit_list.append(admit_act)
 
             # accumulate hospital admits
-            h += admit
-            hosp_admit += admit
+            admit_cum += admit_act
 
-        if i >= days_before_admit + days_admit_duration - 1:
-            h -= hosp_list.pop(0) if hosp_list else 0
+            if i >= days_admit_duration:
+                admit_act -= admit_list.pop(0) if admit_list else 0
 
-        if i >= days_before_free - 1:
-            itot -= tot_list.pop(0)
-            iso_cnt -= iso_list.pop(0)
+        if i >= days_before_free:
+            inf_act -= inf_act_list.pop(0)
+            iso_act -= iso_list.pop(0)
+            sick_act -= sick_list.pop(0)
 
-        if r0_random:
-            r0 = random.uniform(r0-r0_jitter, r0+r0_jitter)
-
-        public *= r0
-
-        # can we emulate introduced infections from outside?
-        #iso += 1
-
-        stat = itot
-        # print("i {}, r {}, ld {}, ll {}, cnt {}, inc {}, dd {}, st {}, lc {}".format(i, r0, ld, ll_enabled, delta_cnt, ld_days_of_trend_needed, ld_days_of_denial, stat, last_stat))
+        stat = inf_act
+        # print("{}, allow {}, check {}, ld {}, frc {}, thresh {}, stat {}/{}, ll {}, cnt {}, trend {}, den {}".format(
+        # i, ld_allowed, ld_check, ld, ld_forced_ending, ld_case_threshold, stat, last_stat, ll_enabled,
+        # delta_cnt, ld_days_of_trend_needed, ld_days_of_denial))
 
         if ld_allowed:
-            if not ld:
-                delta_cnt = delta_cnt + 1 if stat > last_stat else 0
+            if not ld and stat > last_stat:
+                delta_cnt += 1
+            elif ld and stat < last_stat:
+                delta_cnt += 1
             else:
-                delta_cnt = delta_cnt - 1 if stat < last_stat else 0
-
+                delta_cnt = 0
             last_stat = stat
-            if i >= ld_check and not ld:
-                if delta_cnt >= ld_days_of_trend_needed:
-                    ld = 1
+
+            # replace with moving average?
+            if i >= ld_check:
+                ld_check += ld_days_of_denial
+                if not ld and delta_cnt >= ld_days_of_trend_needed and stat >= ld_case_threshold:
                     delta_cnt = 0
+                    ld_check = i + ld_days_duration
+                    ld = True
                     ld_val = stat
-                    ld_check = ld_days_duration + i
-                    ld_startx.append(i+1)
-                    ld_starty.append(itot)
-                    outp("========== lockdown start {} {} {}".format(i, itot, r0))
-            elif i >= ld_check and ld:
-                ld_check = ld_days_duration + i
-                if (delta_cnt <= -ld_days_of_trend_needed and stat < ld_case_threshold) or ld_forced_ending:
-                    ld = 0
+                    ld_startx.append(i)
+                    ld_starty.append(inf_act)
+                    # print("========== {} lockdown start {} {}".format(i, inf_act, r0))
+                elif ld and ((delta_cnt >= ld_days_of_trend_needed and stat < ld_case_threshold) or ld_forced_ending):
                     delta_cnt = 0
+                    ld = False
                     ld_val = 0
-                    ld_check = ld_days_of_denial + i
-                    ld_endx.append(i+1)
-                    ld_endy.append(itot)
-                    outp("========== lockdown lifted {0} {1}".format(itot, r0))
+                    ld_endx.append(i)
+                    ld_endy.append(inf_act)
+                    # print("========== {} lockdown lifted {} {}".format(i, inf_act, r0))
 
         # can we end this?
-        if itot > 330000000:
+        if inf_act > 330000000:
             break
+        elif end_sim:
+            if i >= end_sim:
+                break
+        elif not ld and i > 90 and inf_act <= ld_case_threshold:
+            end_cnt = end_cnt + 1
+            if end_cnt == 14:
+                tot_days = i + 1 - 14
+                break
+        else:
+            end_cnt = 0
 
-        end_cnt = end_cnt + 1 if itot <= 50 else 0
-        if end_cnt == 14:
-            tot_days = i + 1 - 14
-        if end_cnt >= 14 and i > ev_day + 7:
-            break
-
-    dr = dr_visit * cost_dr_visit
-    er = er_visit * cost_er_visit
-    hr = hosp_admit * cost_admit_per_day * days_admit_duration
-    dead = death_visit * cost_death
-    tot = dr + er + hr + dead
+    dr_tot = dr_visit_cum * cost_dr_visit
+    er_tot = er_visit_cum * cost_er_visit
+    hr_tot = hosp_admit * cost_admit_per_day * days_admit_duration
+    dead_tot = death_visit_cum * cost_death
+    cost_tot = dr_tot + er_tot + hr_tot + dead_tot
 
     if not tot_days:
         duration = 'Continuous'
     else:
         duration = str(tot_days) + ' Days'
 
-    pbuf_end = "Duration: {0},    Health Care Costs: {1:6.3e},    Deaths: {2:6.3e}".format(duration, tot, death_visit)
+    pbuf_end = "Duration: {}    Medical: ${}    Deaths: {}".format(
+        duration, format(int(cost_tot), ',d'), format(int(death_visit_cum), ',d'))
 
     outpf(pbuf1)
     outpf(pbuf2)
@@ -762,29 +804,26 @@ def run_sim(parms):
 
     plt.close('all')
 
-    fig, axes = plt.subplots(ncols=2, nrows=1, constrained_layout=False, gridspec_kw = {'wspace':0, 'hspace':0, 'width_ratios': [5, 1]})
+    fig, axes = plt.subplots(ncols=2, nrows=1, constrained_layout=False, gridspec_kw={'wspace': 0, 'hspace': 0, 'width_ratios': [5, 1]})
     ax = axes[0]
 
-    ax.plot(plot_x, plot_itot, label='Currently Infected', color='b')
+    ax.plot(plot_x, plot_inf_act, label='Currently Infected', color='b')
     ax.plot(plot_x, plot_dead, label='Cumulative Dead', color='k')
 
     date_today = '{}, Day: {}'.format(date.today().strftime("%m/%d/%Y"), ev_day)
-    ax.plot([ev_day, ev_day], [0, max(plot_itot)], ls='--', label=date_today, color='g')
+    ax.plot([ev_day, ev_day], [0, max(plot_inf_act)], ls='--', label=date_today, color='g')
     ax.plot([ev_day], [0], marker=6, linestyle='None', color='g', ms=10)
 
     if plots['plot_new_cases']['val']:
         ax.plot(plot_x, plot_inew, label='New Infections', color='r')
 
-    if ld_allowed:
-        if ld_startx and ld_endx:
-            ax.plot(ld_startx, ld_starty, marker=5, label='Lockdown Start', linestyle='None', color='r', ms=10)
-            ax.plot(ld_endx, ld_endy, marker=4, label='Lockdown End',  linestyle='None', color='r', ms=10)
-
-    if plots['plot_hospital_beds']['val']:
-        ax.plot(plot_x, plot_hosp, label='Hospital Beds', color='y')
+    if ld_startx:
+        ax.plot(ld_startx, ld_starty, marker=5, label='Lockdown Start', linestyle='None', color='r', ms=10)
+    if ld_endx:
+        ax.plot(ld_endx, ld_endy, marker=4, label='Lockdown End', linestyle='None', color='r', ms=10)
 
     if plots['plot_cumulative_cases']['val']:
-        ax.plot(plot_x, plot_icum, label='Cumulative Infections', color='m')
+        ax.plot(plot_x, plot_inf_cum, label='Cumulative Infections', color='m')
 
     if ll_enabled:
         t = 'Lessons Learned, Day: {}'.format(ll_days_to_deploy)
@@ -794,9 +833,10 @@ def run_sim(parms):
 
     if test_allowed:
         if not ll_enabled or test_days_to_deploy < ll_days_to_deploy:
+            t = 'Testing Start, Day: {}'.format(test_days_to_deploy)
             x = [test_days_to_deploy]
-            y = [plot_itot[test_days_to_deploy]]
-            ax.plot(x, y, label='Testing Deployed', marker='s', color='g', ms=8)
+            y = [plot_inf_act[test_days_to_deploy]]
+            ax.plot(x, y, label=t, marker='s', color='g', ms=8)
 
     ax.set_xlabel("Days Since Start")
     ax.set_ylabel("People")
@@ -810,7 +850,7 @@ def run_sim(parms):
     ax.set_xlim(left=0, right=1)
     ax.set_ylim(bottom=0, top=1)
 
-    ax.text(.1, 1, pbuf1+pbuf2+pbuf3,
+    ax.text(.1, 1, pbuf1 + pbuf2 + pbuf3,
             horizontalalignment='left',
             verticalalignment='top',
             rotation='horizontal',
@@ -824,7 +864,6 @@ def run_sim(parms):
 
 
 def menu_maker(defs):
-
     def _get_vis(child, gchild=None):
 
         try:
@@ -890,7 +929,10 @@ def menu_maker(defs):
 
         for name, parm in parms.items():
 
-            if name == 'meta':
+            if 'hide' in parm and parm['hide']:
+                continue
+
+            elif name == 'meta':
                 continue
 
             sg_key = title + '-' + name
@@ -899,20 +941,30 @@ def menu_maker(defs):
             val = parm['val']
             tip = parm['tip']
 
-            if type(val) is bool:
+            if 'radio' in parm:
+                buts = []
+                for but in parm['radio']:
+                    v = True if val == but else False
+                    buts.append(sg.Radio(but, name, enable_events=False, key=sg_key + '-' + but, pad=(0, 1, 0, 0), default=v))
+                col1.append([
+                    sg.Text(name, size=(25, 1), pad=(0, 0), tooltip=tip)
+                ])
+                col2.append(buts)
+            elif 'drop' in parm:
+                col1.append([
+                    sg.Text(name, size=(25, 1), pad=(0, 0), tooltip=tip)
+                ])
+                opts = [opt for opt in parm['drop']]
+                w = len(max(opts, key=len))
+                col2.append([
+                    sg.InputCombo(opts, default_value=val, enable_events=True, key=sg_key, size=(w, 1), pad=(0, 1, 0, 0), readonly=True)
+                ])
+            elif type(val) is bool:
                 col1.append([
                     sg.Text(name, pad=(0, 1), tooltip=tip)
                 ])
                 col2.append([
                     sg.Checkbox("", key=sg_key, default=val, enable_events=True, pad=(0, 0))
-                ])
-            elif 'drop' in parm:
-                col1.append([
-                    sg.Text(name, size=(25, 1), pad=(0, 0), tooltip=tip)
-                ])
-                w = len(max(parm['drop'], key=len)) - 1
-                col2.append([
-                    sg.InputCombo(parm['drop'], default_value=val, enable_events=True, key=sg_key, size=(w, 1), pad=(0, 1, 0, 0), readonly=True)
                 ])
             else:
                 col1.append([
@@ -972,7 +1024,7 @@ def menu_maker(defs):
 
         event, values = window.read()
         # if event and event in values:
-            # print(event, values[event])
+        #     print(event, values[event])
 
         if event == 'Outside Lockdown-response_model':
             defs = set_model(values[event])
@@ -1029,6 +1081,7 @@ def menu_maker(defs):
                 elif type(ref) is str:
                     if ref != values[sg_key]:
                         defs[keys[0]][keys[1]]['val'] = values[sg_key]
+                        # print(keys, ref, values[sg_key], defs[keys[0]][keys[1]]['val'])
             if not err:
                 run_sim(defs)
                 continue
