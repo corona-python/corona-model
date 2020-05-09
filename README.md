@@ -42,22 +42,13 @@ of this code and any derived code
 #### With better testing at start of lockdown, we'd save over 100,000 lives.
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
+## Fast Test Results and Isolation Could Eliminate Need for General Lockdown
+![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
+
 ## Taiwan Current Trend
 ### 43 Million People, Few Deaths, What Did They Do Differently?
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan.png)
-
-## Fast Test Results and Isolation Could Eliminate Need for General Lockdown
-![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
  
- ## Then, what if we add just 0.1% random testing of the population?
- ### With better testing after lockdown ends, we'd save 80,000 lives.
-![USA One Day](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa_1_random.png)
-
- ## What if we responded more aggresively, 30 days earlier?
- ### We could have flattened the curve.
- ![Faster Response](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/fast.png)
-
-
 ## My USA model may be optimistic, we are not flattening the curve as of May 3
 At least, at this point, thanks to lockdown, case growth appears more linear than exponential. When lockdown is lifted, without deployment of lessons learned (testing, etc), we will go back to exponential.
 
