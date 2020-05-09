@@ -1,3 +1,5 @@
+<meta name="description" content="A description of the page" />
+
 # corona-model
 
 [Download Latest Version](https://github.com/corona-python/corona-model/releases)
