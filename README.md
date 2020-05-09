@@ -27,16 +27,20 @@ Influential Parameters:
 - Lessons learned
 - Health care quality (percent sick who die)
 
-Number of infections is estimated as 2X number of govt. reported cases.
-This is due to large number of asymptomatic cases and inconsistent reporting.
-Lockdown attack/decay is implemented as simple first order recursive section.
-Test tracing is weighted inversely by days to results.
+Number of infections is estimated as 3X number of govt. reported cases. This is due to large number of undetected asymptomatic infections and inconsistent local, state and federal reporting.
 
 This code may be modified and distributed freely as long as this header is included at the top
 of this code and any derived code
 
 ## USA Current Trend
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
+
+### What If We Eliminated Testing?
+![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
+
+### What If We Started Testing Earlier ?
+### With better testing at start of lockdown, we'd save over 100,000 lives.
+![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
 ## Taiwan Current Trend
 ### 43 Million People, Few Deaths, What Did They Do Differently?
@@ -70,9 +74,7 @@ lockdown, tracing, etc remain consistent.
 #### True Number of Cases
 Things get interesting here. While the replication factor changes as mitigation and containment measure are introduced, 
 I could never correlate the conventional estimate for R0 (2.2 to 2.6) with any reasonable model based on puublished number of cases. 
-In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I may re-calibrate the model based on 4X reported cases instead of 2X as shown here. As of May 4, news outlets are reporting that the true number could be as
-much as 10X what is being officially reported. This uncertainty is due to the lack of testing in USA. Without routine testing, we can only make our best guess as to the true numbers, however, this is mostly a problem with the absolute values being reported. Differential
-trends as a reaction to policy implementations (testing, lockdown, etc) will be mostly unaffected. Confused and frustrated by the lack of a comprehensive federal plan for testing? Me too.
+In my opionion, the number of actual cases is a minimum of 2X and more likely 4X what is being reported by CDC. I have re-calibrated the model based on approximately 3X reported cases instead of 2X as shown earlier. As of May 4, news outlets are reporting that the true number could be as much as 10X what is being officially reported. This uncertainty is due to the lack of testing in USA. Without routine testing, we can only make our best guess as to the true numbers, however, this is mostly a problem with the absolute values being reported. Differential trends as a reaction to policy implementations (testing, lockdown, etc) will be mostly unaffected. Confused and frustrated by the lack of a comprehensive federal plan for testing? Me too.
 
 #### How Do We Model Transitions?
 How quickly the transistions to and from lockdown occur can have a major impact on the number of infections. The model uses simple recursive sections to emulate transition times ( lockdown, testing, etc).
