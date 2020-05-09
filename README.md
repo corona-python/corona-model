@@ -6,7 +6,7 @@
 
 [GitHub](https://github.com/corona-python/corona-model)
 
-# What if you could change the world?
+# How Would You Manage the COVID-19 Pandemic?
 Note: this model is being updated frequently as policies change, features are added and bugs are discovered. 
 Check back often for latest updates.
 ## Options
