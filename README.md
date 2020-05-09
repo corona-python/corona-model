@@ -1,6 +1,7 @@
 # corona-model
 
 [Download Latest Version, ](https://github.com/corona-python/corona-model/releases)
+
 [Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
 # What if you could change the world?
