@@ -33,6 +33,7 @@ This code may be modified and distributed freely as long as this header is inclu
 of this code and any derived code
 
 ## USA Current Trend
+### This Assumes We Start Disciplined Testing and Isolation
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
 ### What If We Eliminated Testing?
