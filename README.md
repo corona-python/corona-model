@@ -4,6 +4,8 @@
 
 [Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
 
+[GitHub](https://github.com/corona-python/corona-model)
+
 # What if you could change the world?
 Note: this model is being updated frequently as policies change, features are added and bugs are discovered. 
 Check back often for latest updates.
@@ -48,10 +50,10 @@ of this code and any derived code
 ### 43 Million People, Few Deaths, What Did They Do Differently?
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan_flat.png)
  
-## We Are Not Significantly Flattening the Curve as of May 3
+## We Are Not Significantly Flattening the Curve
 At least, at this point, thanks to lockdown, case growth appears more linear than exponential. When lockdown is lifted, without deployment of lessons learned (testing, etc), we will go back to exponential.
 
-[Image: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
+[May 3: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may3.png)
 
 ## Discussion/Limitations
