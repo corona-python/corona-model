@@ -1,5 +1,3 @@
-<meta name="description" content="A description of the page" />
-
 # corona-model
 
 [Download Latest Version](https://github.com/corona-python/corona-model/releases)
@@ -18,16 +16,14 @@ Each choice involves a policy decision that has life or death consequences.
 - Do we focus on early containment/mitigation or gamble with the hope that it will just go away?
 - How many deaths will occur as a result of our decision?
 
-_Hover over menu items to see a brief description of parameters_
-
 Influential Parameters:
+- How quickly we react to the crisis
 - Percent sick traced outside lockdown
 - Days of denial
 - Early end of lockdown
-- How quickly we react to lockdown changes (attack/decay)
 - Days before test results
 - Lessons learned
-- Health care quality (percent sick who die)
+- Health care quality
 
 Number of infections is estimated as 3X number of govt. reported cases. This is due to large number of undetected asymptomatic infections and inconsistent local, state and federal reporting.
 
@@ -41,7 +37,7 @@ of this code and any derived code
 ### What If We Eliminated Testing?
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
-### What If We Started Testing Earlier ?
+### What If We Started Testing Earlier?
 #### With better testing at start of lockdown, we'd save over 100,000 lives.
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
