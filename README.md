@@ -29,9 +29,6 @@ Influential Parameters:
 
 Number of infections is estimated as 3X number of govt. reported cases. This is due to large number of undetected asymptomatic infections and inconsistent local, state and federal reporting.
 
-This code may be modified and distributed freely as long as this header is included at the top
-of this code and any derived code
-
 ## USA Current Trend
 ### This Assumes We Start Disciplined Testing and Isolation
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
