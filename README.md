@@ -1,16 +1,14 @@
 # corona-model
 {:.no_toc} 
 
-[Download Latest Version](https://github.com/corona-python/corona-model/releases)
-
-[Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)
-
-[GitHub](https://github.com/corona-python/corona-model)
+[Download Latest Version](https://github.com/corona-python/corona-model/releases)  
+[Presentation](https://github.com/corona-python/corona-model/blob/master/corona.pdf)  
+[GitHub](https://github.com/corona-python/corona-model)  
 
 * TOC
 {:toc}
 
-# How Would You Manage COVID-19?
+## How Would You Manage COVID-19?
 Note: this model is being updated frequently as policies change, features are added and bugs are discovered. 
 Check back often for latest updates.
 
