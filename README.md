@@ -31,8 +31,6 @@ Influential Parameters:
 - Lessons learned
 - Health care quality
 
-Number of infections is estimated as 3X number of govt. reported cases. This is due to large number of undetected asymptomatic infections and inconsistent local, state and federal reporting.
-
 ## USA Current Trend
 **This Assumes We Start Disciplined Testing and Isolation**
 
