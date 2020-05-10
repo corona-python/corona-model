@@ -66,6 +66,8 @@ At least, at this point, thanks to lockdown, case growth appears more linear tha
 
 > South Korea has so far achieved a great deal of success in mitigating the virus without completely shutting down its economy, due in part to its rigorous testing and contact tracing strategies. But as The Times noted Saturday, the question now is whether South Korea can make a further shift toward normalcy without negating its success in flattening the curve. 
 
+[video](https://www.businessinsider.com/seoul-bars-and-clubs-closed-after-covid-19-cases-linked-2020-5?jwsource=cl)
+
 ## Discussion/Limitations
 #### Simulation Time Delta
 I've used a very simple infection model, R infections per day per person. Once R infections have spread by a single source, 
