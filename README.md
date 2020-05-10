@@ -6,6 +6,9 @@
 
 [GitHub](https://github.com/corona-python/corona-model)
 
+* TOC
+{:toc}
+
 # How Would You Manage COVID-19?
 Note: this model is being updated frequently as policies change, features are added and bugs are discovered. 
 Check back often for latest updates.
