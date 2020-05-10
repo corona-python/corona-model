@@ -45,7 +45,7 @@ Gif is comming
 **What If We Eliminated Testing?**
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
-**What If We Started Testing Earlier? We'd Save Over 100,000 Lives!**
+**What If We Started Testing Earlier? We'd Prevent Economic Chaos and Suffering**
 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
