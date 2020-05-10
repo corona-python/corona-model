@@ -37,7 +37,7 @@ Number of infections is estimated as 3X number of govt. reported cases. This is 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
 ### What If We Started Testing Earlier?
-#### With better testing at start of lockdown, we'd save over 100,000 lives.
+#### With Better Testing at Start of Lockdown, We'd Save Over 100,000 Lives
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
 #### Early Test Results and Isolation Could Eliminate Need for General Lockdown
@@ -53,7 +53,7 @@ At least, at this point, thanks to lockdown, case growth appears more linear tha
 [May 9: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may9.png)
 
-### How Aggressive Do We Need To Be?
+### How Aggressive Do We Need to Be?
 _The city of Seoul, South Korea, on Saturday ordered all bars and nightclubs in the city shut down indefinitely just three days after people in the city were told to begin "a new daily life with Covid-19."_
 
 _According to a report from The New York Times, the closure comes after a 29-year-old man tested positive for COVID-19 on Wednesday after he visited three nightclubs in the Itaewon area in the city last weekend. As of Saturday, officials said they were tracking down more than 7,000 people who had visited five nightclubs in the region, according to the report._
