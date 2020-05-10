@@ -40,7 +40,7 @@ Number of infections is estimated as 3X number of govt. reported cases. This is 
 #### With better testing at start of lockdown, we'd save over 100,000 lives.
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
-### Early Test Results and Isolation Could Eliminate Need for General Lockdown
+#### Early Test Results and Isolation Could Eliminate Need for General Lockdown
 ![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
 
 ## Taiwan Current Trend
