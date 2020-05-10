@@ -54,17 +54,17 @@ At least, at this point, thanks to lockdown, case growth appears more linear tha
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may9.png)
 
 ## [How Aggressive Do We Need to Be?](https://www.businessinsider.com/seoul-bars-and-clubs-closed-after-covid-19-cases-linked-2020-5)
-> The city of Seoul, South Korea, on Saturday ordered all bars and nightclubs in the city shut down indefinitely just three days after people in the city were told to begin "a new daily life with Covid-19."
+``` The city of Seoul, South Korea, on Saturday ordered all bars and nightclubs in the city shut down indefinitely just three days after people in the city were told to begin "a new daily life with Covid-19."
 
-> According to a report from The New York Times, the closure comes after a 29-year-old man tested positive for COVID-19 on Wednesday after he visited three nightclubs in the Itaewon area in the city last weekend. As of Saturday, officials said they were tracking down more than 7,000 people who had visited five nightclubs in the region, according to the report.
+According to a report from The New York Times, the closure comes after a 29-year-old man tested positive for COVID-19 on Wednesday after he visited three nightclubs in the Itaewon area in the city last weekend. As of Saturday, officials said they were tracking down more than 7,000 people who had visited five nightclubs in the region, according to the report.
 
-> "Just because of a few people's carelessness, all our efforts so far can go to waste," Seoul Mayor Park Won Soon said at a press conference Saturday.
+"Just because of a few people's carelessness, all our efforts so far can go to waste," Seoul Mayor Park Won Soon said at a press conference Saturday.
 
-> According to The Times, the mayor said at least 40 infections had been linked to nightclubs, though Kwon Jun Wok, a senior disease-control official, said Saturday that just 27 reported cases had been linked to the venues.
+According to The Times, the mayor said at least 40 infections had been linked to nightclubs, though Kwon Jun Wok, a senior disease-control official, said Saturday that just 27 reported cases had been linked to the venues.
 
-> Park said 40 cases included the 27 in Seoul, 12 in Gyeonggi Province and Incheon, and one in Busan, according to The Korea Herald.
+Park said 40 cases included the 27 in Seoul, 12 in Gyeonggi Province and Incheon, and one in Busan, according to The Korea Herald.
 
-> South Korea has so far achieved a great deal of success in mitigating the virus without completely shutting down its economy, due in part to its rigorous testing and contact tracing strategies. But as The Times noted Saturday, the question now is whether South Korea can make a further shift toward normalcy without negating its success in flattening the curve. 
+South Korea has so far achieved a great deal of success in mitigating the virus without completely shutting down its economy, due in part to its rigorous testing and contact tracing strategies. But as The Times noted Saturday, the question now is whether South Korea can make a further shift toward normalcy without negating its success in flattening the curve. ```
 
 ## Discussion/Limitations
 #### Simulation Time Delta
