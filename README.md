@@ -62,7 +62,7 @@ Influential Parameters:
 ## We Are Not Significantly Flattening the Curve
 At least, at this point, thanks to lockdown, case growth appears more linear than exponential. When lockdown is lifted, without deployment of lessons learned (testing, etc), we will go back to exponential.
 
-[Link, May 9: Johns Hopkins Coronavirus Resource Center](https://coronavirus.jhu.edu/data/cumulative-cases)
+[Link](https://coronavirus.jhu.edu/data/cumulative-cases) Johns Hopkins Coronavirus Resource Center, May 9, 2020
 ![countries](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/countries_may9.png)
 
 **How Aggressive Do We Need to Be?**
@@ -74,8 +74,8 @@ _According to a report from The New York Times, the closure comes after a 29-yea
 _"Just because of a few people's carelessness, all our efforts so far can go to waste," Seoul Mayor Park Won Soon said at a press conference Saturday._
 
 _According to The Times, the mayor said at least 40 infections had been linked to nightclubs, though Kwon Jun Wok, a senior disease-control official, said Saturday that just 27 reported cases had been linked to the venues.
-Park said 40 cases included the 27 in Seoul, 12 in Gyeonggi Province and Incheon, and one in Busan, according to The Korea Herald._
-[Link Here](https://www.businessinsider.com/seoul-bars-and-clubs-closed-after-covid-19-cases-linked-2020-5)
+Park said 40 cases included the 27 in Seoul, 12 in Gyeonggi Province and Incheon, and one in Busan, according to The Korea Herald._  
+[Link](https://www.businessinsider.com/seoul-bars-and-clubs-closed-after-covid-19-cases-linked-2020-5)
 
 ## Discussion/Limitations
 **Simulation Time Delta**
