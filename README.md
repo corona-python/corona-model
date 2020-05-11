@@ -37,7 +37,11 @@ Influential Parameters:
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
 ## How Important is Lockdown?
-**What If We Eliminated Lockdown?**
+**What If We Just Ignored the Virus?**
+
+![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_lock.png)
+
+**What If We Started Lockdown Earlier? We;d Prevent Economic Chaos and Suffering**
 
 ![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_cLmFbh.gif)
 
