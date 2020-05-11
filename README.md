@@ -59,7 +59,7 @@ Influential Parameters:
 ![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
 
 ## Taiwan's Success Story, An Example for the World
-**43 Million People, Very Few Deaths, They Moved Quickly**
+**With 43 Million People and Very Few Deaths, Taiwan Moved Quickly**
 
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/taiwan_flat.png)
  
