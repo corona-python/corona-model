@@ -2,7 +2,6 @@
 {:.no_toc} 
 
 [Download Latest Version](https://github.com/corona-python/corona-model/releases)  
-[GitHub](https://github.com/corona-python/corona-model)  
 
 * TOC
 {:toc}
