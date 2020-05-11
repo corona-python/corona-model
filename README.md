@@ -49,7 +49,6 @@ Influential Parameters:
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
 **If We Start Testing Early, Many Lives Can Be Saved**
-
 **A Small Amount of Random Testing and Tracing Makes a Big Difference**
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
