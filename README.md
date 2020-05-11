@@ -79,7 +79,7 @@ _"Just because of a few people's carelessness, all our efforts so far can go to 
 _According to The Times, the mayor said at least 40 infections had been linked to nightclubs, though Kwon Jun Wok, a senior disease-control official, said Saturday that just 27 reported cases had been linked to the venues.
 Park said 40 cases included the 27 in Seoul, 12 in Gyeonggi Province and Incheon, and one in Busan, according to The Korea Herald._ [Link](https://www.businessinsider.com/seoul-bars-and-clubs-closed-after-covid-19-cases-linked-2020-5)
 
-## Discussion/Limitations
+## Discussion/Methodology
 **Simulation Time Delta**
 
 I've used a very simple infection model, R infections per day per person. Once R infections have spread by a single source, 
