@@ -97,6 +97,39 @@ In my opinion, the number of actual cases is a minimum of 2X and more likely 4X 
 
 How quickly the transitions to and from lockdown occur can have a major impact on the number of infections. The model uses simple recursive sections to emulate transition times ( lockdown, testing, etc).
 
-**Days to Test Result**
+**How Does Lockdown Work**
 
-The percentage of people isolated after coming in contact with an infected person is attenuated by a "forgetting factor" determined by 1/N where N = number of days waiting for test results. 
+Intervals of continuous increases and decreases are counted and, after an initial denial delay, the count is compared 
+against a threshold to begin and end lockdown. The lockdown duration, thresholds and isolation (aka shelter in place) 
+compliance rate can specified in the lockdown menus. Future versions may utilize a moving average based threshold
+to make it easier to introduce randomization.
+
+**Who Gets Sick?**
+
+Some percentage of the infected public will show symptoms of the virus. We classify the symptomatic public in two 
+broad categories, severe and mild. Someone with severe symptoms is considered to be diagnosed at a doctor's office, no testing 
+is required, the infection is labeled "suspected" and they are placed into isolation. Someone with milder symptoms 
+may or may not see a doctor to confirm their infection. These percentages can be adjusted in the virus menu.
+
+**How Is Testing Modeled?**
+
+Some percentage of people with milder symptoms will be considered candidates for testing. To model a coordinated
+test plan, random (aka drive-up) testing may be available and some percentage of the infected public will be tested
+this way. 
+
+Testing can be specified to guarantee some average ability to correctly identify an infection. 
+The number of days to receive a test result can also be specified. These parameters may be adjusted in the test 
+parameter menus. 
+
+**Who Gets Traced and Isolated?**
+
+Those with severe symptoms are assumed to be placed into isolation. Their contacts are immediately traced and 
+a small fixed percentage of infections are placed into isolation as a result. Future versions may handle this in
+a more sophisticated way.
+
+Those with milder symptoms and positive test results are isolated and the percentage of related infections traced and 
+isolated is weighted by a "forgetting factor" of 1 / N, where N = number of days waiting for the result. 
+
+**How are Deaths Computed?**
+
+A percentage is applied to those with more severe symptoms, i.e. those who visit a doctor with indications that result in a "suspected case" diagnosis.
