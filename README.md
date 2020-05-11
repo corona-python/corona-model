@@ -50,7 +50,7 @@ Influential Parameters:
 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
-**If We Started Testing Early, We Will Prevent Economic Chaos and Suffering**
+**If We Start Testing Early, We Will Prevent Economic Chaos and Suffering**
 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
