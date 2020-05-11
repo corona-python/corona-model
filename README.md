@@ -39,7 +39,7 @@ Influential Parameters:
 ## How Important is Lockdown?
 **What If We Eliminated Lockdown?**
 
-Gif is comming
+![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_cLmFbh.gif)
 
 ## How Important is Testing?
 **What If We Eliminated Testing?**
