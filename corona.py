@@ -100,8 +100,8 @@ def get_defaults():
             'allow_lockdown': {'val': True, 'tip': 'Allow lockdown as a strategy?'},
             'end_sim': {'val': 'auto', 'tip': 'When do end simulation?',
                         'drop': {'auto': 0, '180 days': 180, '360 days': 360, '540 days': 540, '720 days': 720}},
-            'show_virus': {'val': False, 'tip': 'Show virus parameters.'},
-            'show_health_care': {'val': False, 'tip': 'Show health care parameters.'},
+            'show_virus_menu': {'val': False, 'tip': 'Show virus parameters.'},
+            'show_health_care_menu': {'val': False, 'tip': 'Show health care parameters.'},
             'plot_cumulative_cases': {'val': False, 'tip': 'Are we flattening the infection curve?'},
             'plot_new_cases': {'val': False, 'tip': 'Plot the new cases being discovered'},
             'create_corona_csv': {'val': False, 'tip': 'Output corona.csv file in current directory'},
@@ -111,8 +111,8 @@ def get_defaults():
                     'Testing Parameters': 'allow_testing',
                     'Lessons Learned': 'allow_learning',
                     'Lockdown Parameters': 'allow_lockdown',
-                    'Virus Parameters': 'show_virus',
-                    'Health Care': 'show_health_care',
+                    'Virus Parameters': 'show_virus_menu',
+                    'Health Care': 'show_health_care_menu',
                 }
             }
         },
@@ -608,13 +608,13 @@ def run_sim(parms):
             test_enabled = True
 
         if not ll_enabled and ll_allowed and i >= ll_days_to_deploy:
-            outp("========== deploy lessons learned {} {}==========".format(i, ld, inf_act))
+            # print("========== deploy lessons learned {} {}==========".format(i, ld, inf_act))
 
             percent_sick_traced = ll_percent_sick_traced
             pst_attack = ll_pst_attack
 
             if ll_ld_allowed:
-                ld_check = i + ll_ld_days_of_denial
+                ld_check = i + ll_ld_days_of_denial - ld_days_of_denial
                 ld_days_of_denial = ll_ld_days_of_denial
                 ld_days_of_trend_needed = ll_ld_days_of_trend_needed
                 ld_percent_isolated = ll_ld_percent_isolated
@@ -737,7 +737,7 @@ def run_sim(parms):
         # i, ld_allowed, ld_check, ld, ld_forced_ending, ld_case_threshold, stat, last_stat, ll_enabled,
         # delta_cnt, ld_days_of_trend_needed, ld_days_of_denial))
 
-        if ld_allowed:
+        if ld or ld_allowed:
             if not ld and stat > last_stat:
                 delta_cnt += 1
             elif ld and stat < last_stat:
@@ -748,22 +748,22 @@ def run_sim(parms):
 
             # replace with moving average?
             if i >= ld_check:
-                ld_check += ld_days_of_denial
                 if not ld and delta_cnt >= ld_days_of_trend_needed and stat >= ld_case_threshold:
-                    delta_cnt = 0
                     ld_check = i + ld_days_duration
+                    delta_cnt = 0
                     ld = True
                     ld_val = stat
                     ld_startx.append(i)
                     ld_starty.append(inf_act)
-                    # print("========== {} lockdown start {} {}".format(i, inf_act, r0))
+                    # ("========== {} lockdown start {} {}".format(i, inf_act, r0))
                 elif ld and ((delta_cnt >= ld_days_of_trend_needed and stat < ld_case_threshold) or ld_forced_ending):
+                    ld_check = i + ld_days_of_trend_needed
                     delta_cnt = 0
                     ld = False
                     ld_val = 0
                     ld_endx.append(i)
                     ld_endy.append(inf_act)
-                    # print("========== {} lockdown lifted {} {}".format(i, inf_act, r0))
+                    # ("========== {} lockdown lifted {} {}".format(i, inf_act, r0))
 
         # can we end this?
         if inf_act > 330000000:
