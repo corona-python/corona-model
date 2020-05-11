@@ -100,8 +100,8 @@ How quickly the transitions to and from lockdown occur can have a major impact o
 
 Intervals of continuous increases and decreases are counted and, after an initial denial delay, the count is compared 
 against a threshold to begin and end lockdown. The lockdown duration, thresholds and isolation (aka shelter in place) 
-compliance rate can specified in the lockdown menus. Future versions may utilize a moving average based threshold
-to make it easier to introduce randomization.
+compliance rate can specified in the lockdown menus. As an option, lockdown may be forced to end after the specified duration
+regardless of trend data. Future versions may utilize a moving average based threshold to make it easier to introduce randomization.
 
 **Who Gets Sick?**
 
