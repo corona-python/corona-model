@@ -36,12 +36,12 @@ Influential Parameters:
 
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/usa.png)
 
-## How Important is Lockdown?
+## How Important is Lockdown?  
 **What If We Just Ignored the Virus?**
 
 ![USA Current](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_lock.png)
 
-**What If We Started Lockdown Earlier? We;d Prevent Economic Chaos and Suffering**
+**If We Start Lockdown Early, We Will Prevent Economic Chaos and Suffering**
 
 ![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_cLmFbh.gif)
 
@@ -50,11 +50,11 @@ Influential Parameters:
 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/no_testing.png)
 
-**What If We Started Testing Earlier? We'd Prevent Economic Chaos and Suffering**
+**If We Started Testing Early, We Will Prevent Economic Chaos and Suffering**
 
 ![USA No Testing](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/test_early.png)
 
-**Early Test Results and Isolation Could Eliminate Need for General Lockdown**
+**Early Test Results and Isolation Could Eliminate Need for Total Lockdown**
 
 ![Test GIF](https://raw.githubusercontent.com/wiki/corona-python/corona-model/images/output_7y4R8d.gif)
 
