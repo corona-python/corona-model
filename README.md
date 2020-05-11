@@ -96,7 +96,7 @@ In my opinion, the number of actual cases is a minimum of 2X and more likely 4X 
 
 How quickly the transitions to and from lockdown occur can have a major impact on the number of infections. The model uses simple recursive sections to emulate transition times ( lockdown, testing, etc).
 
-**How Does Lockdown Work**
+**How Does Lockdown Work?**
 
 Intervals of continuous increases and decreases are counted and, after an initial denial delay, the count is compared 
 against a threshold to begin and end lockdown. The lockdown duration, thresholds and isolation (aka shelter in place) 
