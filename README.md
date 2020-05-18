@@ -132,3 +132,6 @@ isolated is weighted by a "forgetting factor" of 1 / N, where N = number of days
 **How are Deaths Computed?**
 
 A percentage is applied to those with more severe symptoms, i.e. those who visit a doctor with indications that result in a "suspected case" diagnosis.
+
+## Contact
+gmail: corona.python 
